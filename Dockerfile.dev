@@ -1,0 +1,24 @@
+# base image
+FROM node:alpine
+
+# set working directory
+WORKDIR /app
+
+# install and cache app dependencies
+COPY package.json .
+RUN npm install
+RUN npm install -g @angular/cli@8.3.0
+
+# add app (unnecessary step if mounting volume but do not forget in other cases)
+COPY . .
+
+# start app
+CMD ng serve --host 0.0.0.0 --port 4202
+
+# cd D:/Study/test/docker-ang-test
+# docker build -f dockerfile.dev .
+# check launch:  docker run -p 4202:4202 {id}
+
+# !!! with volumes and hot reloading, PowerShell ${PWD} -- Linux $(pwd)
+# PowerShell!!! docker run -v ${PWD}:/app -v /app/node_modules -p 4202:4202 --rm -e "CHOKIDAR_USEPOLLING=true" {id}
+
