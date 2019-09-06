@@ -1,5 +1,11 @@
 # base image
-FROM node:alpine
+FROM docker.io/node:10-stretch
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y --no-install-recommends chromium
+
+ENV CHROME_BIN=chromium
 
 # set working directory
 WORKDIR /app
@@ -22,3 +28,5 @@ CMD ng serve --host 0.0.0.0 --port 4202
 # !!! with volumes and hot reloading, PowerShell ${PWD} -- Linux $(pwd)
 # PowerShell!!! docker run -v ${PWD}:/app -v /app/node_modules -p 4202:4202 --rm -e "CHOKIDAR_USEPOLLING=true" {id}
 
+# ci testing
+# docker run imgId npm run test:ci
