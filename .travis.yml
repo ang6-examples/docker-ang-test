@@ -6,4 +6,4 @@ before_install:
   - docker build -t ang6-examples/docker-ang-test -f Dockerfile.dev .
 
 script:
-  - docker run ang6-examples/docker-ang-test npm run test
+  - docker run ang6-examples/docker-ang-test npm run test:ci
